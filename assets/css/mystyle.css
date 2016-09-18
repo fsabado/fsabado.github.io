@@ -1,0 +1,10 @@
+/*Here are the styles I've added to personalize the website*/
+
+.client {
+    height:200px;
+    display:block;
+    margin:10px auto;
+    border-radius: 1px;
+    border:2px solid #a1a1a1;
+
+}
