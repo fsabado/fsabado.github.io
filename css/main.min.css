@@ -8410,7 +8410,7 @@ nav[role=footer] .fa {
 }
 .video-container {
 	position:relative;
-	padding-bottom:56.25%;
+	padding-bottom:0%;
 	padding-top:30px;
 	height:0;
 	overflow:hidden;
