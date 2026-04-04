@@ -4,9 +4,9 @@ subtitle: "Systems Research · Test Automation · Embedded"
 year: 2011
 category: "systems-research"
 tags: ["systems-research", "test-automation", "embedded", "reliability", "FPGA"]
-thumbnail: "/projects/async_extreme/testSetup.png"
+thumbnail: "/projects/async_extreme/testSetup.webp"
 images:
-  - "/projects/async_extreme/testSetup.png"
+  - "/projects/async_extreme/testSetup.webp"
   - "/projects/async_extreme/architecture.jpg"
 paperUrl: "https://scholarworks.uark.edu/cgi/viewcontent.cgi?article=1001&context=eleguht"
 published: true
