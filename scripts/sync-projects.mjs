@@ -1,9 +1,8 @@
 /**
  * Mirror `projects/*` → `public/projects/` so /projects/... URLs work in dev and build.
- * Same assets CI used to copy via shell; `predev` / `prebuild` run this automatically.
+ * Wipes `public/projects/` first so renamed/removed files under `projects/` do not linger (e.g. old PNG → WebP).
  */
-import { cp, mkdir } from 'node:fs/promises';
-import { readdir } from 'node:fs/promises';
+import { cp, mkdir, readdir, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -12,6 +11,7 @@ const src = join(root, 'projects');
 const dest = join(root, 'public', 'projects');
 
 async function main() {
+  await rm(dest, { recursive: true, force: true });
   await mkdir(dest, { recursive: true });
   const entries = await readdir(src, { withFileTypes: true });
   for (const ent of entries) {
