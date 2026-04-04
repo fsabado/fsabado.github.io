@@ -1,9 +1,9 @@
 ---
-title: "Comparison of Synchronous and Asynchronous Digital Circuits under Extreme Temperatures"
-subtitle: "Asynchronous Circuit / Extreme Environments"
+title: "Reliability Testing Framework for Digital Systems in Extreme Environments"
+subtitle: "Systems Research · Test Automation · Embedded"
 year: 2011
-category: "asynchronous-circuits"
-tags: ["NCL", "asynchronous", "extreme-temperatures", "space", "FPGA"]
+category: "systems-research"
+tags: ["systems-research", "test-automation", "embedded", "reliability", "FPGA"]
 thumbnail: "/projects/async_extreme/testSetup.png"
 images:
   - "/projects/async_extreme/testSetup.png"
@@ -15,7 +15,9 @@ order: 9
 
 ## Overview
 
-The reliability of digital circuits for space applications is of utmost importance. Problems arise because semiconductor device behavior changes dramatically with temperature swings, which is common in space environments. This project compared a synchronous and an asynchronous (NCL) implementation of the 8031 microcontroller across a wide range of temperatures.
+This research designed and executed a **systematic reliability testing framework** for embedded processors operating under extreme environmental conditions (-180°C to +125°C). An FPGA-based test harness automated the validation of two processor implementations, running each through a suite of correctness routines across six temperature points to surface failure modes and compare design robustness.
+
+The core research question: can a clockless (event-driven) design architecture eliminate the class of timing failures that plague clock-driven systems when operating conditions change drastically?
 
 ## The Problem with Synchronous Circuits
 

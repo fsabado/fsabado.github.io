@@ -1,9 +1,9 @@
 ---
-title: "Low Power Application of Narrow Inverse Effects on Null Convention Logic"
-subtitle: "VLSI / Low Power Design"
+title: "Power Optimization Research: Transistor Layout Effects on Nanoscale Circuits"
+subtitle: "Systems Research · Power Engineering · Measurement"
 year: 2012
-category: "vlsi"
-tags: ["NCL", "VLSI", "low-power", "multi-finger", "asynchronous"]
+category: "research"
+tags: ["power-optimization", "systems-research", "measurement", "nanoscale", "analysis"]
 thumbnail: "/projects/multifinger/multifinger-thumb.png"
 images:
   - "/projects/multifinger/multifinger1.png"
@@ -15,7 +15,7 @@ order: 6
 
 ## Overview
 
-Low power design has become an important consideration in today's electronics industry. The impact of power dissipation has exponentially increased as the size of transistors decrease into the nanoscale. This has caused a major paradigm shift where power dissipation has become as important as performance and area.
+This research applied a structured **measurement and analysis methodology** to quantify power optimization trade-offs in nanoscale circuits. By systematically varying layout configurations and measuring energy per operation across each variant, the study produced empirical data to guide design decisions — a methodology directly analogous to performance profiling and benchmarking in software engineering.
 
 ## Research Focus
 

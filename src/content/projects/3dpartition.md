@@ -1,9 +1,9 @@
 ---
-title: "3D IC Partitioning Methods for Null Convention Logic"
-subtitle: "3D IC / VLSI / Low Power / NCL"
+title: "Graph Partitioning Algorithms for 3D Circuit Design"
+subtitle: "Algorithm Research · Optimization · Systems"
 year: 2013
-category: "vlsi"
-tags: ["3D-IC", "VLSI", "Null-Convention-Logic", "low-power", "partitioning"]
+category: "algorithms"
+tags: ["graph-algorithms", "optimization", "partitioning", "systems-research", "published"]
 thumbnail: "/projects/3dpartition/Tezzaron3D.png"
 images:
   - "/projects/3dpartition/Tezzaron3D.png"
@@ -14,11 +14,9 @@ order: 3
 
 ## Overview
 
-Three-dimensional integrated circuit (3D-IC) technology has been proposed as a solution to the problems caused by deep-submicron interconnects. Consisting of multiple layers of interconnected planes, 3D-ICs have the benefit of shorter latencies and lower power consumption due to shorter wire lengths when compared to a single-wafer implementation.
+This research tackled a classical **graph partitioning problem** in the context of multi-layer chip design — how to optimally divide a circuit graph across two physical layers to minimize interconnect cost, communication overhead, and thermal hotspots.
 
-However, stacking active devices presents new design challenges, the most notable being **thermal dissipation**.
-
-When paired with a delay-insensitive asynchronous circuit design technique such as **Null Convention Logic (NCL)**, the two technologies unite to solve the inherent weaknesses of each other.
+The core challenge maps directly to NP-hard graph bisection: given a netlist represented as a weighted directed graph, find a balanced cut that minimizes the number of cross-layer edges (analogous to network partition problems in distributed systems). Three algorithmic strategies were designed, implemented, and benchmarked against each other.
 
 ## Problem Statement
 

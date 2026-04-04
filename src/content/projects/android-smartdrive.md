@@ -1,9 +1,9 @@
 ---
 title: "SmartDrive: A Cloud Enabled Mobile System to Prevent Distracted Driving"
-subtitle: "Android / Cloud / Machine Learning"
+subtitle: "Android · Cloud Architecture · Machine Learning"
 year: 2012
 category: "mobile"
-tags: ["Android", "machine-learning", "cloud", "mobile", "safety"]
+tags: ["Android", "machine-learning", "cloud-architecture", "mobile", "safety"]
 thumbnail: "/projects/android-smartdrive/drivesmart.png"
 videoUrl: "https://www.youtube.com/embed/tEECr2tqqsE"
 published: true

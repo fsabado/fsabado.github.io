@@ -1,9 +1,9 @@
 ---
-title: "Differential Power Analysis and Mitigation on AES"
-subtitle: "Computer Security"
+title: "Cryptographic Security Research: Side-Channel Attack Analysis on AES"
+subtitle: "Security Research · Cryptography · Statistical Analysis"
 year: 2013
-category: "hardware-security"
-tags: ["side-channel", "AES", "DPA", "cryptography", "hardware-security"]
+category: "security"
+tags: ["security", "cryptography", "side-channel", "AES", "statistical-analysis"]
 thumbnail: "/projects/dpa-aes/First_last_overview.png"
 images:
   - "/projects/dpa-aes/First_last_overview.png"
@@ -16,7 +16,9 @@ order: 5
 
 ## Overview
 
-Advanced Encryption Standard (AES) is the standard encryption algorithm used worldwide and adopted by the United States government. While the encryption algorithm is mathematically strong, side-channel information from the physical circuit itself — such as power consumption — can be exploited to break the cipher without attacking the algorithm directly.
+This project applied **statistical cryptanalysis** to break AES encryption without attacking the algorithm itself — instead exploiting measurable side-channel emissions (power consumption) from a running system. The attack pipeline collects thousands of power traces, builds statistical correlation models between hypothesized key candidates and observed measurements, and surfaces the secret key through signal analysis.
+
+Beyond executing the attack, the project designed and validated a **hardware countermeasure** — current compensation — that makes power consumption data-independent, defeating the statistical assumptions the attack relies on.
 
 ## The AES Target
 

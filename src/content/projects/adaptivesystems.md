@@ -1,9 +1,9 @@
 ---
-title: "Hexacopter Using ArduPilot and Nexys4"
-subtitle: "Adaptive Systems"
+title: "Fault-Tolerant Flight Control System with Adaptive FPGA Logic"
+subtitle: "Embedded Systems · Firmware · Fault Tolerance"
 year: 2015
 category: "embedded-systems"
-tags: ["FPGA", "ArduPilot", "adaptive-systems", "fault-tolerance", "embedded"]
+tags: ["embedded-systems", "firmware", "fault-tolerance", "adaptive-control", "real-time"]
 thumbnail: "/projects/adaptivesystems/hexacopter-config.png"
 images:
   - "/projects/adaptivesystems/hexacopter-config.png"
@@ -16,12 +16,9 @@ order: 4
 
 ## Overview
 
-Adaptive systems are characterized by their ability to evolve with their environment. With regards to control, two main categories exist: **feedforward** and **feedback** systems.
+This project designed and implemented a **layered fault-tolerant control system** for a hexacopter drone, integrating firmware customization, FPGA-based adaptive logic, and real-time fault detection. The software architecture spans three layers — physical actuation, ArduPilot flight firmware, and custom FPGA control logic — communicating via serial protocols to achieve resilient autonomous flight.
 
-- In a **feedforward system**, the controller sends signals directly to the system to operate in a desired manner.
-- In a **feedback system**, the structure sends signals indicating performance back to the controller to allow for even further adaptivity.
-
-Adaptive systems can also be defined through their capacity to tolerate faults. There are numerous ways systems can achieve this functionality including redundancy, checkpointing, and masking.
+The system demonstrates fault tolerance through redundancy: when a motor degrades, the FPGA control layer detects the anomaly and redistributes thrust in real time, maintaining stable flight without operator intervention.
 
 ## Project Implementation
 

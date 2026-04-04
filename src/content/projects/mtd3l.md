@@ -1,9 +1,9 @@
 ---
-title: "Multi-Threshold Dual-spacer Dual-rail Delay-insensitive Logic"
-subtitle: "Hardware Security"
+title: "MTD3L: Low-Overhead Side-Channel Attack Mitigation for Secure Systems"
+subtitle: "Security Research · Cryptography · Published IEEE"
 year: 2015
-category: "hardware-security"
-tags: ["hardware-security", "side-channel", "low-power", "VLSI", "asynchronous"]
+category: "security"
+tags: ["security", "cryptography", "side-channel", "research", "IEEE-published"]
 thumbnail: "/projects/mtd3l/MTD3L_Arch.png"
 published: true
 order: 1
@@ -11,11 +11,9 @@ order: 1
 
 ## Overview
 
-As more sensitive data are shared, transmitted, and stored on electronic devices, data security has become an important concern. Encryption algorithms that are safe against software-based attacks still face security threats from **side channel attacks**. For example, an encryption device's power consumption or operational timing can be correlated to the data being processed by the device, which can give away the device's secret key.
+Published at **IEEE ISCAS 2016**, this research designed and validated a novel defense against side-channel attacks — a class of security vulnerabilities where an attacker infers secret cryptographic keys by observing a system's power consumption or timing, rather than breaking the encryption algorithm itself.
 
-**Dual-spacer Dual-rail Delay-insensitive Logic (D3L)** is an IC design methodology that has been proved effective in mitigating power and timing attacks; however, large energy and area overheads of D3L circuits have hindered their applicability.
-
-In this paper, an IC design methodology named **Multi-Threshold D3L (MTD3L)** is presented that achieves all D3L security advantages with considerably reduced overhead.
+The core innovation (MTD3L) applies a selective multi-threshold voltage assignment strategy to an existing secure design methodology, achieving equivalent attack resistance at significantly lower energy and area cost. Results were validated against Differential Power Analysis (DPA) attacks.
 
 ## Key Contributions
 

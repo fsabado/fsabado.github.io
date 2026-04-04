@@ -1,9 +1,9 @@
 ---
 title: "Angry Prims: Interfacing with the Virtual World via Microsoft Kinect and SecondLife"
-subtitle: "Virtual Reality / Capstone"
+subtitle: "Real-Time Systems · Computer Vision · C#"
 year: 2012
-category: "virtual-reality"
-tags: ["Kinect", "SecondLife", "gesture-recognition", "virtual-reality", "C#"]
+category: "software"
+tags: ["real-time-systems", "gesture-recognition", "computer-vision", "C#", "distributed-systems"]
 thumbnail: "/projects/capstone-angryprims/angryprims.png"
 videoUrl: "https://www.youtube.com/embed/whAKcBiZxNI"
 published: true
