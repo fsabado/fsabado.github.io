@@ -1,0 +1,64 @@
+---
+interface Props {
+  post: {
+    slug: string;
+    data: {
+      title: string;
+      description: string;
+      publishDate: Date;
+      category: string;
+      tags: string[];
+      image?: string;
+    };
+  };
+}
+
+const { post } = Astro.props;
+const { title, description, publishDate, category, tags, image } = post.data;
+
+const formattedDate = publishDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<a href={`/blog/${post.slug}/`} class="group block no-underline hover:no-underline">
+  <div class="card hover:shadow-lg transition-all duration-300 h-full flex flex-col">
+    {
+      image && (
+        <div class="aspect-video overflow-hidden bg-slate-100 dark:bg-slate-700 shrink-0">
+          <img
+            src={image}
+            alt={title}
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      )
+    }
+
+    <div class="p-6 flex flex-col flex-1">
+      <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-3">
+        <time datetime={publishDate.toISOString()}>{formattedDate}</time>
+        <span>·</span>
+        <span class="capitalize">{category}</span>
+      </div>
+
+      <h3
+        class="text-base font-bold text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-2 leading-snug"
+      >
+        {title}
+      </h3>
+
+      <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 flex-1 line-clamp-2">
+        {description}
+      </p>
+
+      <div class="flex flex-wrap gap-1.5">
+        {tags.slice(0, 3).map((tag) => <span class="badge">{tag}</span>)}
+      </div>
+    </div>
+  </div>
+</a>

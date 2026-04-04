@@ -1,0 +1,131 @@
+---
+import ThemeToggle from '../theme/ThemeToggle.astro';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+
+const navItems = [
+  { href: '/', label: 'About' },
+  { href: '/resume/', label: 'Resume' },
+  { href: '/portfolio/', label: 'Portfolio' },
+  { href: '/blog/', label: 'Blog' },
+  { href: '/contact/', label: 'Contact' },
+];
+
+function isActive(href: string): boolean {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+}
+---
+
+<header
+  class="fixed top-0 w-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 z-50 transition-colors"
+>
+  <nav class="site-container py-4 flex justify-between items-center">
+    <!-- Logo -->
+    <a
+      href="/"
+      class="text-2xl font-bold text-blue-600 dark:text-blue-400 no-underline hover:no-underline hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
+    >
+      FS
+    </a>
+
+    <!-- Desktop Navigation -->
+    <ul class="hidden md:flex items-center space-x-8 list-none m-0 p-0">
+      {
+        navItems.map(({ href, label }) => (
+          <li>
+            <a
+              href={href}
+              class:list={[
+                'font-medium transition-colors no-underline hover:no-underline',
+                isActive(href)
+                  ? 'text-blue-600 dark:text-blue-400'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100',
+              ]}
+            >
+              {label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <!-- Right side controls -->
+    <div class="flex items-center gap-2">
+      <ThemeToggle />
+
+      <!-- Mobile hamburger -->
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden p-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg
+          id="icon-hamburger"
+          class="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg
+          id="icon-close"
+          class="w-5 h-5 hidden"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Navigation -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900"
+  >
+    <ul class="list-none m-0 p-0 py-2">
+      {
+        navItems.map(({ href, label }) => (
+          <li>
+            <a
+              href={href}
+              class:list={[
+                'block px-6 py-3 font-medium transition-colors no-underline hover:no-underline',
+                isActive(href)
+                  ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-slate-800'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800',
+              ]}
+            >
+              {label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const hamburger = document.getElementById('icon-hamburger');
+  const closeIcon = document.getElementById('icon-close');
+
+  btn?.addEventListener('click', () => {
+    const isOpen = !menu?.classList.contains('hidden');
+    menu?.classList.toggle('hidden', isOpen);
+    btn.setAttribute('aria-expanded', String(!isOpen));
+    hamburger?.classList.toggle('hidden', !isOpen);
+    closeIcon?.classList.toggle('hidden', isOpen);
+  });
+</script>

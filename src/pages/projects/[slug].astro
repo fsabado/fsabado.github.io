@@ -1,0 +1,178 @@
+---
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+
+const {
+  title,
+  subtitle,
+  year,
+  category,
+  tags,
+  thumbnail,
+  images,
+  demoUrl,
+  repoUrl,
+  videoUrl,
+  paperUrl,
+} = project.data;
+
+// gallery: use images array if present, else just the thumbnail
+const gallery = images && images.length > 0 ? images : [thumbnail];
+---
+
+<ProjectLayout title={title} description={subtitle} image={thumbnail}>
+  <!-- Back link -->
+  <div class="pt-8 mb-6">
+    <a
+      href="/portfolio/"
+      class="inline-flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors no-underline hover:no-underline"
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      </svg>
+      Back to Portfolio
+    </a>
+  </div>
+
+  <!-- Hero image / gallery -->
+  {gallery.length === 1 ? (
+    <div class="rounded-2xl overflow-hidden mb-8 bg-slate-100 dark:bg-slate-800 aspect-video">
+      <img
+        src={gallery[0]}
+        alt={title}
+        class="w-full h-full object-cover"
+        loading="eager"
+        decoding="async"
+      />
+    </div>
+  ) : (
+    <div class="mb-8" id="gallery">
+      <!-- Main image -->
+      <div class="rounded-2xl overflow-hidden mb-3 bg-slate-100 dark:bg-slate-800 aspect-video">
+        <img
+          id="gallery-main"
+          src={gallery[0]}
+          alt={title}
+          class="w-full h-full object-cover"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+      <!-- Thumbnails -->
+      <div class="flex gap-2 overflow-x-auto pb-1">
+        {gallery.map((img, i) => (
+          <button
+            data-src={img}
+            class:list={[
+              'gallery-thumb shrink-0 w-20 h-14 rounded-lg overflow-hidden border-2 transition-colors focus:outline-none',
+              i === 0 ? 'border-blue-500' : 'border-transparent hover:border-slate-400 dark:hover:border-slate-500',
+            ]}
+          >
+            <img src={img} alt={`${title} image ${i + 1}`} class="w-full h-full object-cover" loading="lazy" decoding="async" />
+          </button>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <!-- Header -->
+  <header class="mb-10">
+    <div class="flex flex-wrap gap-2 mb-4">
+      {tags.map((tag) => <span class="badge">{tag}</span>)}
+    </div>
+    <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-slate-100 mb-3 leading-tight">
+      {title}
+    </h1>
+    <div class="flex items-center gap-4 text-sm text-slate-500 dark:text-slate-400 mb-6">
+      <span>{subtitle}</span>
+      <span>·</span>
+      <span>{year}</span>
+      <span>·</span>
+      <span class="capitalize">{category.replace(/-/g, ' ')}</span>
+    </div>
+
+    <!-- Action links -->
+    {
+      (demoUrl || repoUrl || videoUrl || paperUrl) && (
+        <div class="flex flex-wrap gap-3">
+          {demoUrl && (
+            <a href={demoUrl} target="_blank" rel="noopener noreferrer" class="btn-primary text-sm">
+              Live Demo
+            </a>
+          )}
+          {repoUrl && (
+            <a href={repoUrl} target="_blank" rel="noopener noreferrer" class="btn-secondary text-sm">
+              View Code
+            </a>
+          )}
+          {paperUrl && (
+            <a href={paperUrl} target="_blank" rel="noopener noreferrer" class="btn-secondary text-sm">
+              Read Paper
+            </a>
+          )}
+          {videoUrl && (
+            <a href={videoUrl} target="_blank" rel="noopener noreferrer" class="btn-secondary text-sm">
+              Watch Video
+            </a>
+          )}
+        </div>
+      )
+    }
+  </header>
+
+  <!-- Video embed (if YouTube) -->
+  {
+    videoUrl && videoUrl.includes('youtube') && (
+      <div class="mb-8 rounded-xl overflow-hidden aspect-video">
+        <iframe
+          src={videoUrl}
+          title={`${title} video`}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          class="w-full h-full"
+        />
+      </div>
+    )
+  }
+
+  <!-- Project content (from Markdown) -->
+  <article class="content-prose max-w-none">
+    <Content />
+  </article>
+
+  <!-- Footer navigation -->
+  <div class="mt-16 pt-8 border-t border-slate-200 dark:border-slate-700">
+    <a href="/portfolio/" class="btn-secondary">← Back to Portfolio</a>
+  </div>
+</ProjectLayout>
+
+<script>
+  const main = document.getElementById('gallery-main') as HTMLImageElement | null;
+  const thumbs = document.querySelectorAll<HTMLButtonElement>('.gallery-thumb');
+
+  thumbs.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const src = btn.dataset.src ?? '';
+      if (main) main.src = src;
+      thumbs.forEach((t) => t.classList.remove('border-blue-500'));
+      thumbs.forEach((t) => t.classList.add('border-transparent'));
+      btn.classList.remove('border-transparent');
+      btn.classList.add('border-blue-500');
+    });
+  });
+</script>

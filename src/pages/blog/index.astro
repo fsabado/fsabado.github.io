@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import BlogCard from '../../components/blog/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const posts = allPosts.sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+);
+---
+
+<BaseLayout
+  title="Blog — Francis Sabado"
+  description="Articles on hardware security, VLSI design, asynchronous circuits, and software engineering."
+>
+  <Header currentPath="/blog/" />
+
+  <main class="pt-20 pb-16 min-h-screen">
+    <div class="site-container py-12">
+      <h1 class="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-3">Blog</h1>
+      <p class="text-lg text-slate-500 dark:text-slate-400 mb-10">
+        Thoughts on hardware security, VLSI, asynchronous circuits, and software engineering.
+      </p>
+
+      {
+        posts.length === 0 ? (
+          <div class="text-center py-20">
+            <p class="text-slate-500 dark:text-slate-400 text-lg">No posts yet. Check back soon!</p>
+          </div>
+        ) : (
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {posts.map((post) => (
+              <BlogCard post={post} />
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

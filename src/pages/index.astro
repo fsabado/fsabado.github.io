@@ -1,0 +1,168 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import ProjectCard from '../components/project/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects', (p) => p.data.published);
+const featuredProjects = allProjects
+  .sort((a, b) => b.data.year - a.data.year)
+  .slice(0, 3);
+
+const skills = [
+  {
+    icon: '🏗️',
+    title: 'Distributed Systems',
+    desc: 'Fault-tolerant, low-latency services at scale; real-time data pipelines and platform engineering',
+  },
+  {
+    icon: '📊',
+    title: 'Data & Analytics',
+    desc: 'End-to-end data pipelines, developer workflow analytics, Airflow, Athena, Redshift, Quicksight',
+  },
+  {
+    icon: '🤖',
+    title: 'AI / ML Engineering',
+    desc: 'Building AI-powered developer tools, intelligent insights platforms, and ML-backed workflow systems',
+  },
+  {
+    icon: '🛠️',
+    title: 'Developer Tools',
+    desc: 'Internal platforms, productivity tooling, CI/CD infrastructure, and metrics-driven engineering',
+  },
+];
+---
+
+<BaseLayout title="Francis Sabado — Software Engineer & AI Engineer">
+  <Header currentPath="/" />
+
+  <main class="pt-20">
+    <!-- ── Hero ─────────────────────────────────────── -->
+    <section class="py-24 sm:py-32">
+      <div class="site-container">
+        <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+          <!-- Text -->
+          <div class="flex-1 text-center md:text-left">
+            <p class="text-sm font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-3">
+              Portfolio
+            </p>
+            <h1
+              class="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-slate-100 mb-4 leading-tight"
+            >
+              Francis Sabado
+            </h1>
+            <p class="text-lg sm:text-xl text-slate-500 dark:text-slate-400 mb-6 font-medium">
+              Software Engineer · AI Engineer · Researcher
+            </p>
+            <p
+              class="text-base sm:text-lg text-slate-600 dark:text-slate-300 mb-6 leading-relaxed max-w-xl"
+            >
+              Senior Software Engineer with 10+ years building scalable systems, developer platforms,
+              and mission-critical software across industry, research, and government. PhD in
+              Computer Engineering.
+            </p>
+
+            <!-- Company highlights -->
+            <div class="flex flex-wrap items-center gap-3 mb-8 justify-center md:justify-start">
+              <!-- Lyft (current) -->
+              <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-semibold bg-pink-100 text-pink-800 dark:bg-pink-900/30 dark:text-pink-300 ring-1 ring-pink-200 dark:ring-pink-700">
+                <img src="https://cdn.simpleicons.org/lyft/EA0061" width="13" height="13" alt="" aria-hidden="true" />
+                <span class="w-1.5 h-1.5 rounded-full bg-pink-500 animate-pulse shrink-0"></span>
+                Lyft
+              </span>
+              <!-- Amazon -->
+              <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-semibold bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300 ring-1 ring-orange-200 dark:ring-orange-700">
+                <img src="https://cdn.simpleicons.org/amazon/FF9900" width="13" height="13" alt="" aria-hidden="true" />
+                Amazon
+              </span>
+              <!-- Sandia National Labs -->
+              <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 dark:bg-slate-700/50 dark:text-slate-300 ring-1 ring-slate-200 dark:ring-slate-600">
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                </svg>
+                Sandia National Labs
+              </span>
+            </div>
+
+            <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+              <a href="/portfolio/" class="btn-primary">View Portfolio</a>
+              <a href="/resume/" class="btn-secondary">View Resume</a>
+            </div>
+          </div>
+
+          <!-- Photo -->
+          <div class="shrink-0">
+            <div
+              class="w-44 h-44 sm:w-56 sm:h-56 rounded-full overflow-hidden ring-4 ring-white dark:ring-slate-700 shadow-2xl"
+            >
+              <img
+                src="/images/headshot.jpg"
+                alt="Francis Sabado"
+                class="w-full h-full object-cover object-top"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Expertise ───────────────────────────────── -->
+    <section class="py-16 bg-slate-50 dark:bg-slate-800/30 transition-colors">
+      <div class="site-container">
+        <h2 class="section-title">Expertise</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {
+            skills.map(({ icon, title, desc }) => (
+              <div class="card p-6 hover:shadow-md transition-shadow">
+                <div class="text-3xl mb-4">{icon}</div>
+                <h3 class="text-base font-bold text-slate-900 dark:text-slate-100 mb-2">{title}</h3>
+                <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">{desc}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Featured Projects ──────────────────────── -->
+    <section class="py-16">
+      <div class="site-container">
+        <div class="flex justify-between items-center mb-8">
+          <h2 class="section-title mb-0">Featured Projects</h2>
+          <a href="/portfolio/" class="btn-secondary text-sm">View all →</a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {featuredProjects.map((project) => <ProjectCard project={project} />)}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Quick Stats ────────────────────────────── -->
+    <section class="py-16 bg-slate-50 dark:bg-slate-800/30 transition-colors">
+      <div class="site-container">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 text-center">
+          {
+            [
+              { value: '10+', label: 'Years Industry Exp.' },
+              { value: 'PhD', label: 'Computer Engineering' },
+              { value: '3', label: 'Top Companies' },
+              { value: '4', label: 'Conference Publications' },
+            ].map(({ value, label }) => (
+              <div>
+                <div class="text-3xl sm:text-4xl font-bold text-blue-600 dark:text-blue-400 mb-1">
+                  {value}
+                </div>
+                <div class="text-sm text-slate-500 dark:text-slate-400">{label}</div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

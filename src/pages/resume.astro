@@ -1,0 +1,322 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+---
+
+<BaseLayout
+  title="Resume — Francis Sabado"
+  description="Resume of Francis Sabado — PhD Computer Engineering, Senior Software Engineer with 10+ years building scalable systems, developer platforms, and data pipelines across Lyft, AWS, and Sandia National Laboratories."
+>
+  <Header currentPath="/resume/" />
+
+  <main class="pt-20 pb-16 min-h-screen">
+    <div class="site-container py-12">
+      <!-- Page header -->
+      <div class="flex justify-between items-start mb-12">
+        <div>
+          <h1 class="text-4xl font-bold text-slate-900 dark:text-slate-100">Resume</h1>
+          <p class="text-slate-500 dark:text-slate-400 mt-2">Francis Sabado</p>
+        </div>
+        <a
+          href="/contact/"
+          class="btn-primary hidden sm:inline-flex"
+        >
+          Contact Me
+        </a>
+      </div>
+
+      <div class="space-y-12">
+        <!-- ── Experience ─────────────────────────── -->
+        <section>
+          <h2
+            class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-6 pb-2 border-b border-slate-200 dark:border-slate-700"
+          >
+            Experience
+          </h2>
+          <div class="space-y-8">
+            {
+              [
+                {
+                  title: 'Software Engineer',
+                  org: 'Lyft',
+                  location: 'New York, NY',
+                  period: 'January 2026 – Present',
+                  bullets: [],
+                },
+                {
+                  title: 'Software Development Engineer',
+                  org: 'Amazon Web Services (AWS)',
+                  location: 'New York, NY',
+                  period: 'June 2022 – September 2025',
+                  bullets: [
+                    'Designed and built scalable internal tools and services to improve the productivity and experience of thousands of Amazon software engineers across the company.',
+                    'Developed and deployed metrics and insight platforms that analyze developer workflows (code commits, code reviews, deployments, ticketing systems) to identify bottlenecks, drive continuous improvement, and accelerate software development processes across distributed teams.',
+                    'Partnered with cross-functional stakeholders to define technical requirements and deliver impactful solutions in high-ambiguity, high-scale environments.',
+                    'Leveraged distributed computing and storage systems to create fault-tolerant, low-latency services that support real-time developer analytics.',
+                  ],
+                },
+                {
+                  title: 'Senior Software Engineer, R&D',
+                  org: 'Sandia National Laboratories',
+                  location: 'Albuquerque, NM',
+                  period: 'January 2018 – June 2022',
+                  bullets: [
+                    'Designed and developed mission-critical software systems for remote sensing, enabling real-time capture, processing, exploitation, visualization, and distribution of satellite sensor data.',
+                    'Led end-to-end development of a high-performance satellite map application with features such as target tracking, mission planning, commanding, pointing diagnostics, and system health monitoring.',
+                    'Built real-time data processing pipelines to support high-consequence decision-making in time-sensitive operational environments.',
+                    'Engineered robust APIs, custom network protocols, and simulation/test frameworks for satellite command and control systems.',
+                    'Mentored and onboarded new engineers, interns, and team members.',
+                  ],
+                },
+                {
+                  title: 'Graduate Research Assistant',
+                  org: 'University of Arkansas',
+                  location: 'Fayetteville, AR',
+                  period: 'January 2015 – December 2017',
+                  bullets: [
+                    'Designed digital circuits and systems for ultra-low power design, extreme temperatures, hardware security, asynchronous logic, and 3D ICs.',
+                    'Developed software tools for designing asynchronous circuits and 3D circuits.',
+                  ],
+                },
+                {
+                  title: 'Software Engineering Intern — Tools and Automation Team',
+                  org: 'Hewlett-Packard',
+                  location: 'Houston, TX',
+                  period: 'June 2015 – August 2015',
+                  bullets: [
+                    'Provided support and maintenance for the Storage Automation Tool (SAT), a critical infrastructure tool used by 6 internal HP teams (Perl, HTML, JavaScript).',
+                    'Incorporated build configurations for Jenkins CI to automatically build and test all SAT applications, increasing developer productivity.',
+                    'Developed and deployed a password reset web application supporting 65,000 HP Inc. employees (ASP.NET, C#, HTML, JavaScript, Active Directory, IIS).',
+                  ],
+                },
+                {
+                  title: 'Graduate Teaching Assistant',
+                  org: 'University of Arkansas',
+                  location: 'Fayetteville, AR',
+                  period: 'August 2012 – December 2014',
+                  bullets: [
+                    'Instructed a course on programming foundations teaching students algorithms and data structures.',
+                    'Supervised the digital design lab and taught students the fundamental topics of digital circuit design.',
+                  ],
+                },
+                {
+                  title: 'Systems Administrator',
+                  org: 'University of Arkansas',
+                  location: 'Fayetteville, AR',
+                  period: 'August 2012 – December 2017',
+                  bullets: [
+                    'Managed and maintained lab infrastructure, including provisioning, updating, and administering computer systems and servers (RedHat, CentOS, Ubuntu).',
+                  ],
+                },
+                {
+                  title: 'Undergraduate Research Fellow',
+                  org: 'University of Arkansas',
+                  location: 'Fayetteville, AR',
+                  period: 'January 2011 – May 2012',
+                  bullets: [
+                    'Research Fellowship: Analysis of Digital Circuits under Extreme Temperatures.',
+                    'Android Development: SmartDrive – Cloud Enabled Mobile System for Safe Driving.',
+                    'Angry Prims: Interfacing with the Virtual World via Microsoft Kinect and SecondLife.',
+                  ],
+                },
+              ].map(({ title, org, location, period, bullets }) => (
+                <div class="flex gap-4 sm:gap-6">
+                  <div class="hidden sm:block w-2 shrink-0 mt-1.5">
+                    <div class="w-2 h-2 rounded-full bg-blue-500 mt-1" />
+                  </div>
+                  <div class="flex-1">
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2">
+                      <div>
+                        <h3 class="font-bold text-slate-900 dark:text-slate-100">{title}</h3>
+                        <p class="text-blue-600 dark:text-blue-400 text-sm font-medium">
+                          {org} · {location}
+                        </p>
+                      </div>
+                      <span class="text-sm text-slate-500 dark:text-slate-400 shrink-0">{period}</span>
+                    </div>
+                    <ul class="list-disc list-inside space-y-1">
+                      {bullets.map((b) => (
+                        <li class="text-sm text-slate-600 dark:text-slate-300">{b}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <!-- ── Education ──────────────────────────── -->
+        <section>
+          <h2
+            class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-6 pb-2 border-b border-slate-200 dark:border-slate-700"
+          >
+            Education
+          </h2>
+          <div class="space-y-6">
+            {
+              [
+                {
+                  degree: 'PhD, Computer Engineering',
+                  school: 'University of Arkansas',
+                  date: 'December 2017',
+                  gpa: '4.00',
+                  details: 'Doctoral Academy Fellowship',
+                  courses: '',
+                },
+                {
+                  degree: 'M.S., Computer Engineering',
+                  school: 'University of Arkansas',
+                  date: 'December 2015',
+                  gpa: '4.00',
+                  details: '',
+                  courses:
+                    'System Level Design, Integrated Circuit Design, Hardware Security, Low Power System Design, VLSI Design',
+                },
+                {
+                  degree: 'B.S., Computer Engineering (Highest Distinction) · Minor: Mathematics',
+                  school: 'University of Arkansas',
+                  date: 'May 2012',
+                  gpa: '3.95',
+                  details:
+                    "Dean's List, Chancellor's List, Governor's Scholarship, Chancellor's Scholarship (2008–2012)",
+                  courses: 'Software Engineering, Embedded Systems, Mobile System Programming, AI',
+                },
+              ].map(({ degree, school, date, gpa, details, courses }) => (
+                <div class="card p-6">
+                  <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2">
+                    <div>
+                      <h3 class="font-bold text-slate-900 dark:text-slate-100">{degree}</h3>
+                      <p class="text-blue-600 dark:text-blue-400 text-sm font-medium">{school}</p>
+                    </div>
+                    <div class="text-right shrink-0">
+                      <div class="text-sm text-slate-500 dark:text-slate-400">{date}</div>
+                      <div class="text-sm font-semibold text-slate-700 dark:text-slate-300">
+                        GPA: {gpa}
+                      </div>
+                    </div>
+                  </div>
+                  {details && <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">{details}</p>}
+                  {courses && (
+                    <p class="text-sm text-slate-500 dark:text-slate-500 mt-1 italic">
+                      Coursework: {courses}
+                    </p>
+                  )}
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <!-- ── Skills ─────────────────────────────── -->
+        <section>
+          <h2
+            class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-6 pb-2 border-b border-slate-200 dark:border-slate-700"
+          >
+            Technical Skills
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {
+              [
+                {
+                  category: 'Programming Languages',
+                  items: ['Java', 'Python', 'TypeScript', 'SQL', 'C++'],
+                },
+                {
+                  category: 'Cloud & Infrastructure',
+                  items: ['AWS', 'CDK', 'Docker', 'Kubernetes', 'CI/CD', 'Linux'],
+                },
+                {
+                  category: 'Data & Pipelines',
+                  items: ['Airflow', 'Athena', 'Glue', 'Redshift', 'Quicksight', 'Spark'],
+                },
+                {
+                  category: 'Frameworks & Tools',
+                  items: ['Spring Boot', 'React', 'JavaFX', 'Git', 'Jira'],
+                },
+              ].map(({ category, items }) => (
+                <div class="card p-5">
+                  <h3 class="text-sm font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wide mb-3">
+                    {category}
+                  </h3>
+                  <div class="flex flex-wrap gap-2">
+                    {items.map((item) => (
+                      <span class="badge-secondary">{item}</span>
+                    ))}
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <!-- ── Publications ───────────────────────── -->
+        <section>
+          <h2
+            class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-6 pb-2 border-b border-slate-200 dark:border-slate-700"
+          >
+            Publications
+          </h2>
+
+          <div class="space-y-6">
+            <div>
+              <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-4">
+                Conference Papers
+              </h3>
+              <ol class="space-y-4 list-decimal list-inside">
+                {
+                  [
+                    'Di, Jia & Bell, Brent & Bouillon, William & Brady, John & Le, Thao & Lo, Chien-Wei & Men, Liang & Nelson, Spencer & Sabado, Francis & Suchanek, Andrew. (2017). Recent Advances in Low Power Asynchronous Circuit Design. Journal of Low Power Electronics. 13. 280-297. 10.1166/jolpe.2017.1494.',
+                    'Habimana J., Sabado, F., and Jia Di, "Multi-Threshold Dual-spacer Dual-rail Delay-insensitive Logic: An Improved IC Design Methodology for Side Channel Attack Mitigation". IEEE International Symposium on Circuits & Systems 2016. 11 August 2016.',
+                    'Caley, L., Chien-Wei Lo, Sabado, F., Jia Di, "A comparative analysis of 3D-IC partitioning schemes for asynchronous circuits," IC Design & Technology (ICICDT), 2014 IEEE International Conference on, pp.1,4, 28-30 May 2014.',
+                    'Sabado F. and Jia Di, "Comparison of Asynchronous and Synchronous Digital Circuits under Extreme Temperatures." State Undergraduate Research Fellowship (SURF). May 2011.',
+                  ].map((pub) => (
+                    <li class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-2">
+                      {pub}
+                    </li>
+                  ))
+                }
+              </ol>
+            </div>
+
+            <div>
+              <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-4">
+                Technical Reports
+              </h3>
+              <ol class="space-y-4 list-decimal list-inside">
+                {
+                  [
+                    {
+                      text: 'Francis Sabado. "Asynchronous 3D (Async3D): Design Methodology and Analysis of 3D Asynchronous Circuits". Theses and Dissertations. Dec. 2017.',
+                      url: 'https://scholarworks.uark.edu/etd/2584/',
+                    },
+                    {
+                      text: 'Francis Sabado. "3D IC Integration," Technical Report. University of Arkansas, Dec. 2015.',
+                      url: null,
+                    },
+                    {
+                      text: 'Francis Sabado. "Asynchronous Fused Floating Point Complex Multiplier," Technical Report, University of Arkansas, April 2015.',
+                      url: null,
+                    },
+                  ].map(({ text, url }) => (
+                    <li class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-2">
+                      {text}{' '}
+                      {url && (
+                        <a href={url} target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400">
+                          [Link]
+                        </a>
+                      )}
+                    </li>
+                  ))
+                }
+              </ol>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

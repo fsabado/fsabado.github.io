@@ -1,3 +1,11 @@
-
 *.db
 
+# Astro build output
+dist/
+.astro/
+
+# Node modules
+node_modules/
+
+# Editor
+.DS_Store

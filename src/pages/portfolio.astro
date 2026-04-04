@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import ProjectGrid from '../components/project/ProjectGrid.astro';
+import SearchBar from '../components/search/SearchBar.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects', (p) => p.data.published);
+const projects = allProjects.sort((a, b) => b.data.year - a.data.year);
+
+// Build search index
+const searchData = JSON.stringify(
+  projects.map((p) => ({
+    type: 'project',
+    slug: `/projects/${p.slug}/`,
+    title: p.data.title,
+    description: p.data.subtitle,
+    tags: p.data.tags,
+  }))
+);
+---
+
+<BaseLayout
+  title="Portfolio — Francis Sabado"
+  description="Research projects in hardware security, VLSI design, asynchronous circuits, and 3D IC technology."
+>
+  <Header currentPath="/portfolio/" />
+
+  <main class="pt-20 pb-16 min-h-screen">
+    <div class="site-container py-12">
+      <!-- Header -->
+      <div class="mb-10">
+        <h1 class="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-3">Portfolio</h1>
+        <p class="text-lg text-slate-500 dark:text-slate-400 mb-6">
+          {projects.length} research projects spanning hardware security, VLSI, asynchronous
+          circuits, and more.
+        </p>
+        <SearchBar searchData={searchData} />
+      </div>
+
+      <!-- Grid -->
+      <ProjectGrid projects={projects} />
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

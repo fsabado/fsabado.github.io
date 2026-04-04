@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const { title, description, publishDate, category, tags, author, image } = post.data;
+
+const formattedDate = publishDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={`${title} — Francis Sabado`} description={description} image={image}>
+  <Header currentPath="/blog/" />
+
+  <main class="pt-20 pb-16 min-h-screen">
+    <div class="site-container py-12 max-w-3xl">
+      <!-- Back link -->
+      <div class="mb-8">
+        <a
+          href="/blog/"
+          class="inline-flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors no-underline hover:no-underline"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Blog
+        </a>
+      </div>
+
+      <!-- Cover image -->
+      {
+        image && (
+          <div class="rounded-2xl overflow-hidden mb-8 bg-slate-100 dark:bg-slate-800 aspect-video">
+            <img
+              src={image}
+              alt={title}
+              class="w-full h-full object-cover"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+        )
+      }
+
+      <!-- Post header -->
+      <header class="mb-10">
+        <div class="flex flex-wrap gap-2 mb-4">
+          {tags.map((tag) => <span class="badge">{tag}</span>)}
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-slate-100 mb-4 leading-tight">
+          {title}
+        </h1>
+        <div class="flex items-center gap-4 text-sm text-slate-500 dark:text-slate-400">
+          <time datetime={publishDate.toISOString()}>{formattedDate}</time>
+          <span>·</span>
+          <span class="capitalize">{category}</span>
+          <span>·</span>
+          <span>{author}</span>
+        </div>
+      </header>
+
+      <!-- Post content -->
+      <article class="content-prose">
+        <Content />
+      </article>
+
+      <!-- Tags footer -->
+      <footer class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-700">
+        <div class="flex flex-wrap gap-2 mb-6">
+          {tags.map((tag) => <span class="badge-secondary">#{tag}</span>)}
+        </div>
+        <a href="/blog/" class="btn-secondary">← Back to Blog</a>
+      </footer>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
