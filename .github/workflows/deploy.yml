@@ -32,11 +32,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Copy project images into public/
-        run: |
-          mkdir -p public/projects
-          cp -r projects/* public/projects/ 2>/dev/null || true
-
       - name: Build Astro site
         run: npm run build
 

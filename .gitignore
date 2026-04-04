@@ -4,6 +4,9 @@
 dist/
 .astro/
 
+# Generated from projects/ by npm run sync:projects (predev / prebuild)
+public/projects/
+
 # Node modules
 node_modules/
 
