@@ -3,8 +3,14 @@
   "type": "module",
   "version": "0.1.0",
   "scripts": {
+    "sync:projects": "node scripts/sync-projects.mjs",
     "dev": "astro dev",
     "start": "astro dev",
+    "optimize:images": "node scripts/optimize-images.mjs",
+    "pwa:icons": "node scripts/generate-pwa-icons.mjs",
+    "predev": "npm run sync:projects",
+    "prestart": "npm run sync:projects",
+    "prebuild": "npm run sync:projects && npm run pwa:icons",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
@@ -12,13 +18,14 @@
     "type-check": "astro check"
   },
   "dependencies": {
-    "astro": "^4.15.0",
     "@astrojs/tailwind": "^5.1.0",
-    "tailwindcss": "^3.4.0",
-    "fuse.js": "^7.0.0"
+    "astro": "^4.15.0",
+    "tailwindcss": "^3.4.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
+    "@vite-pwa/astro": "^1.2.0",
+    "icojs": "^0.20.1",
     "prettier": "^3.1.0",
     "typescript": "^5.3.0"
   }
