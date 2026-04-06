@@ -38,13 +38,19 @@ const { searchData } = Astro.props;
   </div>
 </div>
 
-<!-- type=module required for dynamic import() of Fuse from CDN -->
 <script type="module" define:vars={{ searchData }}>
   (function () {
     const data = JSON.parse(searchData);
     const input = document.getElementById('search-input');
     const resultsEl = document.getElementById('search-results');
     if (!input || !resultsEl) return;
+
+    // Escape HTML to prevent XSS
+    function esc(s) {
+      const d = document.createElement('div');
+      d.textContent = s;
+      return d.innerHTML;
+    }
 
     // Simple substring search used before Fuse loads
     function simpleSearch(query) {
@@ -59,17 +65,14 @@ const { searchData } = Astro.props;
 
     let fuse = null;
 
-    // Lazy-load Fuse.js via CDN for fuzzy matching
-    import('https://cdn.jsdelivr.net/npm/fuse.js@7/dist/fuse.mjs')
+    // Lazy-load Fuse.js from vendored npm package
+    import('fuse.js')
       .then(({ default: Fuse }) => {
         fuse = new Fuse(data, {
           keys: ['title', 'description', 'tags'],
           threshold: 0.35,
           includeScore: true,
         });
-      })
-      .catch(() => {
-        /* falls back to simpleSearch */
       });
 
     function renderResults(matches) {
@@ -81,19 +84,19 @@ const { searchData } = Astro.props;
           .map(
             (item) => `
           <a
-            href="${item.slug}"
+            href="${esc(item.slug)}"
             class="flex items-start gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors no-underline group"
           >
             <div class="flex-1 min-w-0">
               <div class="text-sm font-medium text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 truncate">
-                ${item.title}
+                ${esc(item.title)}
               </div>
               <div class="text-xs text-slate-500 dark:text-slate-400 truncate mt-0.5">
-                ${item.description}
+                ${esc(item.description)}
               </div>
             </div>
             <span class="text-xs text-slate-400 capitalize shrink-0 mt-0.5 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full">
-              ${item.type}
+              ${esc(item.type)}
             </span>
           </a>
         `

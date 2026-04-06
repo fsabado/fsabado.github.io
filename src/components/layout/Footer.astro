@@ -1,4 +1,6 @@
 ---
+import { navItems } from '../../data/navigation';
+
 const year = new Date().getFullYear();
 ---
 
@@ -18,13 +20,7 @@ const year = new Date().getFullYear();
       <!-- Nav links -->
       <nav class="flex items-center gap-6">
         {
-          [
-            { href: '/', label: 'About' },
-            { href: '/resume/', label: 'Resume' },
-            { href: '/portfolio/', label: 'Portfolio' },
-            { href: '/blog/', label: 'Blog' },
-            { href: '/contact/', label: 'Contact' },
-          ].map(({ href, label }) => (
+          navItems.map(({ href, label }) => (
             <a
               href={href}
               class="text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors no-underline hover:no-underline"
@@ -53,7 +49,7 @@ const year = new Date().getFullYear();
           </svg>
         </a>
         <a
-          href="http://linkedin.com/in/fsabado"
+          href="https://linkedin.com/in/fsabado"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn"

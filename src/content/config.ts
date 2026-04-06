@@ -29,6 +29,7 @@ const blog = defineCollection({
     tags: z.array(z.string()),
     author: z.string().default('Francis Sabado'),
     image: z.string().optional(),
+    published: z.boolean().default(true),
   }),
 });
 

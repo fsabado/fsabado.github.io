@@ -1,19 +1,12 @@
 ---
 import ThemeToggle from '../theme/ThemeToggle.astro';
+import { navItems } from '../../data/navigation';
 
 interface Props {
   currentPath?: string;
 }
 
 const { currentPath = '/' } = Astro.props;
-
-const navItems = [
-  { href: '/', label: 'About' },
-  { href: '/resume/', label: 'Resume' },
-  { href: '/portfolio/', label: 'Portfolio' },
-  { href: '/blog/', label: 'Blog' },
-  { href: '/contact/', label: 'Contact' },
-];
 
 function isActive(href: string): boolean {
   if (href === '/') return currentPath === '/';

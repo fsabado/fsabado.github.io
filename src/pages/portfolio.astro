@@ -8,17 +8,25 @@ import { getCollection } from 'astro:content';
 
 const allProjects = await getCollection('projects', (p) => p.data.published);
 const projects = allProjects.sort((a, b) => b.data.year - a.data.year);
+const allPosts = await getCollection('blog');
 
 // Build search index
-const searchData = JSON.stringify(
-  projects.map((p) => ({
+const searchData = JSON.stringify([
+  ...projects.map((p) => ({
     type: 'project',
     slug: `/projects/${p.slug}/`,
     title: p.data.title,
     description: p.data.subtitle,
     tags: p.data.tags,
-  }))
-);
+  })),
+  ...allPosts.map((b) => ({
+    type: 'blog',
+    slug: `/blog/${b.slug}/`,
+    title: b.data.title,
+    description: b.data.description,
+    tags: b.data.tags,
+  })),
+]);
 ---
 
 <BaseLayout

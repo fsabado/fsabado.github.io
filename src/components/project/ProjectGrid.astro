@@ -16,15 +16,14 @@ interface Props {
 }
 
 const { projects } = Astro.props;
-const published = projects.filter((p) => p.data.published);
 ---
 
 {
-  published.length === 0 ? (
+  projects.length === 0 ? (
     <p class="text-slate-500 dark:text-slate-400 text-center py-12">No projects found.</p>
   ) : (
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {published.map((project) => (
+      {projects.map((project) => (
         <ProjectCard project={project} />
       ))}
     </div>
