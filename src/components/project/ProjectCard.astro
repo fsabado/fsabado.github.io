@@ -1,7 +1,7 @@
 ---
 interface Props {
   project: {
-    slug: string;
+    id: string;
     data: {
       title: string;
       subtitle: string;
@@ -16,7 +16,7 @@ const { project } = Astro.props;
 const { title, subtitle, year, tags, thumbnail } = project.data;
 ---
 
-<a href={`/projects/${project.slug}/`} class="group block no-underline hover:no-underline">
+<a href={`/projects/${project.id}/`} class="group block no-underline hover:no-underline">
   <div class="card hover:shadow-lg transition-all duration-300 h-full flex flex-col">
     <!-- Thumbnail -->
     <div class="aspect-video overflow-hidden bg-slate-100 dark:bg-slate-700 shrink-0">

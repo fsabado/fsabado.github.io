@@ -1,7 +1,7 @@
 ---
 interface Props {
   post: {
-    slug: string;
+    id: string;
     data: {
       title: string;
       description: string;
@@ -23,7 +23,7 @@ const formattedDate = publishDate.toLocaleDateString('en-US', {
 });
 ---
 
-<a href={`/blog/${post.slug}/`} class="group block no-underline hover:no-underline">
+<a href={`/blog/${post.id}/`} class="group block no-underline hover:no-underline">
   <div class="card hover:shadow-lg transition-all duration-300 h-full flex flex-col">
     {
       image && (
