@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
-    "icojs": "^0.20.1",
+    "icojs": "^0.20.2",
     "prettier": "^3.1.0",
     "typescript": "^5.3.0"
   }
