@@ -14,14 +14,14 @@ const allPosts = await getCollection('blog');
 const searchData = JSON.stringify([
   ...projects.map((p) => ({
     type: 'project',
-    slug: `/projects/${p.slug}/`,
+    slug: `/projects/${p.id}/`,
     title: p.data.title,
     description: p.data.subtitle,
     tags: p.data.tags,
   })),
   ...allPosts.map((b) => ({
     type: 'blog',
-    slug: `/blog/${b.slug}/`,
+    slug: `/blog/${b.id}/`,
     title: b.data.title,
     description: b.data.description,
     tags: b.data.tags,
